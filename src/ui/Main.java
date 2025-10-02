@@ -64,8 +64,28 @@ public class Main {
      * @return true si esta balanceada, false si no
      */
     public boolean verificarBalanceo(String s) {
-        // TODO: completar 
-        return false;
+        PilaGenerica<Character> pila = new PilaGenerica<>(s.length());
+
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == '[' || c == '{') {
+                pila.Push(c);
+            } else if (c == ')' || c == ']' || c == '}') {
+                if (pila.getTop() == 0) {
+                    return false;
+                }
+                char tope = pila.Pop();
+                if (!esParCorrecto(tope, c)) {
+                    return false;
+                }
+            }
+        }
+        return pila.getTop() == 0;
+    }
+
+    private boolean esParCorrecto(char apertura, char cierre) {
+        return (apertura == '(' && cierre == ')') ||
+               (apertura == '[' && cierre == ']') ||
+               (apertura == '{' && cierre == '}');
     }
 
     /**
@@ -74,7 +94,22 @@ public class Main {
      * @param objetivo suma objetivo
      */
     public void encontrarParesConSuma(int[] numeros, int objetivo) {
-        // TODO: completar
+        try {
+            TablasHash tabla = new TablasHash(numeros.length * 2);
+
+            for (int x : numeros) {
+                int complemento = objetivo - x;
+
+                if (tabla.search(complemento, complemento)) {
+                    System.out.println("Par encontrado: (" + complemento + ", " + x + ")");
+                }
+
+                tabla.insert(x, x);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en TablasHash: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) throws Exception {

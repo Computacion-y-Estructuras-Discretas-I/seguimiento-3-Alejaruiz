@@ -11,6 +11,7 @@ public class PilaGenerica<T> {
   public PilaGenerica(int n) {
     this.arreglo = (T[]) new Object[n];
     this.size = n;
+    this.top = 0;
   }
 
   public void Push(T x) throws IndexOutOfBoundsException {
@@ -31,9 +32,6 @@ public class PilaGenerica<T> {
     }
   }
 
-  public T[] getArreglo() {
-    return arreglo;
-  }
 
   public int getTop() {
     return top;
@@ -43,15 +41,7 @@ public class PilaGenerica<T> {
     return size;
   }
 
-  public void setArreglo(T[] arreglo) {
-    this.arreglo = arreglo;
-  }
+ 
 
-  public void setTop(int top) {
-    this.top = top;
-  }
-
-  public void setSize(int size) {
-    this.size = size;
-  }
+  
 }
